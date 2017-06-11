@@ -24,6 +24,7 @@ Run `yarn test`.
 ### Technologies from :heart: OSS projects
 
 - React
+- React Router
 - Styled-Components
 - Webpack
 - Babel
