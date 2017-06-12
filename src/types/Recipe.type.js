@@ -1,7 +1,8 @@
+// @flow
 import type { Ingredient } from './Ingredient.type';
 
 export type Recipe = {
-  recipe_id: number,
+  id: number,
   title: string,
   image_name: string,
   instructions: string,

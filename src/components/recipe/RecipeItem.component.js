@@ -1,31 +1,30 @@
 // @flow
-
 import React from 'react';
 import styled from 'styled-components';
 
-import type { Recipe } from '../../types/Recipe.type';
-import { media } from '../../commons/styles.commons';
+import { media, spacingDefault } from '../../commons/styles.commons';
 
 const RecipeItemWrapper = styled.div`
   flex: 0 1 auto;
   text-align: center;
   cursor: pointer;
-  background: ${props => props.selected ? '#eee' : 'transparent'};
+  padding: ${spacingDefault};
+  border: calc(${spacingDefault} / 2) solid #fff;
+  background: ${props => props.selected ? '#e4e9ea' : 'transparent'};
   &:hover {
-    background: #eee;
+    background: ${props => props.selected ? '#e4e9ea' : '#eee'};
   }
 
-  /* TODO fix media query
-  width: 20%;
-  ${media.desktop`width: 25%;`}
-  ${media.tablet`width: 50%;`}
+  width: calc((25% - (${spacingDefault} * 3)));
+  ${media.desktop`width: calc((33% - (${spacingDefault} * 2.9)));`}
+  ${media.tablet`width: calc((50% - (${spacingDefault} * 3)));`}
   ${media.phone`width: 100%;`}
-  */
 `;
 
 const RecipeTitle = styled.div`
   font-size: 1.5rem;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 `;
 
 const RecipeImageWrapper = styled.div`
@@ -36,49 +35,56 @@ const RecipeImageWrapper = styled.div`
 
 const RecipeImage = styled.img`
   display: inline-block;
-  width: 80%;
+  width: 100%;
 `;
 
 const RecipeInstructions = styled.div`
-  padding: 1rem;
   font-size: 1rem;
-  text-align: center;
+  text-align: left;
 `;
 
 const RecipeItem = ({
-  data,
+  id,
+  image,
+  title,
   onRecipeSelected,
-  selected
+  instructions,
+  selected,
+  servings
 }: {
-  data: Recipe,
+  id: number,
+  image: string,
+  title: string,
   onRecipeSelected: (selectedRecipe: {id: number, selected: boolean}) => {id: number, selected: boolean},
-  selected: boolean
+  instructions: string,
+  selected: boolean,
+  servings: number
 }) => (
   <RecipeItemWrapper
     onClick={ (e: MouseEvent): {id: number, selected: boolean} => onRecipeSelected({
-      id: data.recipe_id,
+      id,
       selected: !selected
     }) }
     selected={ selected }
   >
-    <RecipeTitle>
-      { data.title } <br/>
-      For { data.servings } person{ data.servings > 1 ? 's' : '' }
-    </RecipeTitle>
     <RecipeImageWrapper>
       <RecipeImage
         // Dynamic require is not officially supported by Webpack, but it work for now
         // I've tried with dynamic import new ES proposal, but can't manage to use it with flow 
-        src={ require(`../../assets/images/recipes/${data.image_name}`) }
-        alt={ data.title }
+        src={ require(`../../assets/images/recipes/${image}`) }
+        alt={ title }
       />
     </RecipeImageWrapper>
-    <RecipeInstructions>
-      { data.instructions }
-    </RecipeInstructions>
+    <RecipeTitle>
+      { title } <br/>
+      For { servings } person{ servings > 1 ? 's' : '' }
+    </RecipeTitle>
+    <RecipeInstructions
+      dangerouslySetInnerHTML={{
+        __html: instructions.replace(/\r\n/g, '<br/>')
+      }}
+    />
   </RecipeItemWrapper>
 )
-
-
 
 export default RecipeItem;

@@ -24,6 +24,7 @@ Run `yarn test`.
 ### Technologies from :heart: OSS projects
 
 - React
+- Redux
 - React Router
 - Styled-Components
 - Webpack
@@ -31,3 +32,11 @@ Run `yarn test`.
 - Flow
 - Create-React-App
 ...
+
+### TODO
+
+- fix navigation ...
+- add data cleaning on load (ingredients for one person)
+- add input number to increase / decrease servings
+- unify units kg -> g
+- fix test connected components and add tests
