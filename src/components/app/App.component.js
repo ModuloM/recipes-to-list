@@ -9,6 +9,7 @@ import type { INGREDIENTS_COMPUTE_ACTION } from '../list/list.actions';
 import { computeIngredients } from '../list/list.actions';
 import type { Recipe } from '../../types/Recipe.type';
 import { getRecipes, getSelectedRecipes } from '../recipe/recipe.reducer';
+import { getIngredientList } from '../list/list.reducer';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -124,7 +125,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     recipes: getRecipes(state),
-    selectedRecipes: getSelectedRecipes(state)
+    selectedRecipes: getSelectedRecipes(state),
+    ingredients: getIngredientList(state)
   }
 }
 

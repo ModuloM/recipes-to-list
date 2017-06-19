@@ -10,7 +10,7 @@ describe('IngredientService', () => {
         "id": 1,
         "title": "Tomato Cucumber Avocado Salad",
         "image_name": "tomato-cucumber-avocado-salad.jpg",
-        "instructions": "Add cherry tomatoes, cucumber, avocado, red onion and garlic in a medium salad bowl.\r\n\r\nSprinkle minced parsley. Pour olive oil over salad, and season with salt and pepper.\r\n\r\nNote: Add avocado right before serving if you are planning to refrigerate the salad.",
+        "instructions": "instructions.",
         "servings": 4,
         "ingredients": [
           {
@@ -54,7 +54,7 @@ describe('IngredientService', () => {
         "id": 2,
         "title": "Spicy Garlic Rosemary Shrimp & Pasta",
         "image_name": "spicy-garlic-rosemary-shrimp-pasta.jpg",
-        "instructions": "Boil pasta per package directions to al dente. While it is cooking, prepare shrimp.\r\n\r\nHeat a large skillet over moderate heat, then add olive oil and garlic and cook briefly, until golden. Add shrimp, then sprinkle with rosemary and pepper flakes. Cook, stirring, until just cooked through, about 3 minutes. Remove from heat. Season with salt and pepper to taste.\r\n\r\nWhen pasta is ready, drain and immediately spray lightly but evenly with olive oil cooking spray, tossing to coat. Portion into dishes and top with shrimp. Squeeze lemon juice over top and serve. ",
+        "instructions": "instructions.",
         "servings": 3,
         "ingredients": [
           {
@@ -91,7 +91,7 @@ describe('IngredientService', () => {
         "id": 3,
         "title": "Butter and Herb Poached Shrimp",
         "image_name": "butter-and-herb-poached-shrimp.jpg",
-        "instructions": "In a sauce pan on Medium heat add water and butter. Allow the butter to completely melt (about 2 minutes). Add Basil, Cayenne Pepper, Salt, Pepper, Paprika and Garlic Powder. Cook on Medium heat for about 2-3 minutes stirring slowly so that the butter is infused with the flavors. Lower the heat to Low.\r\n\r\nAdd Shrimp and stir slowly until shrimp turns a nice coral color and the tails curl. \r\n\r\n(3 Minutes with Extra Large Shrimp max 4-5 Minutes)\r\n\r\nBe careful not to over cook the shrimp or it will become rubbery. ",
+        "instructions": "instructions.",
         "servings": 2,
         "ingredients": [
           {
@@ -118,6 +118,452 @@ describe('IngredientService', () => {
         ]
       }
     };
+  });
+
+  describe('cleanRecipesIngredientsUnits', () => {
+    test('should unify recipes ingredients units and quantities', ()=> {
+      // Given
+      const recipesArray = Object.values(recipes);
+
+      // When
+      const result = ingredientService.cleanRecipesIngredientsUnits(recipesArray);
+  
+      // Then
+      expect(result).toEqual([
+        {
+          "id": 1,
+          "image_name": "tomato-cucumber-avocado-salad.jpg",
+          "ingredients": [
+            {
+              "department": "Produce",
+              "name": "cherry tomatoes",
+              "quantity": 237,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "cucumber",
+              "quantity": 237,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.25,
+              "unit": ""
+            },
+            {
+              "department": "Produce",
+              "name": "parsley",
+              "quantity": 15,
+              "unit": "ml"
+            },
+            {
+              "department": "Condiments",
+              "name": "olive oil",
+              "quantity": 15,
+              "unit": "ml"
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 4,
+          "title": "Tomato Cucumber Avocado Salad"
+        },
+        {
+          "id": 2,
+          "image_name": "spicy-garlic-rosemary-shrimp-pasta.jpg",
+          "ingredients": [
+            {
+              "department": "Pasta",
+              "name": "pasta",
+              "quantity": 227,
+              "unit": "g"
+            },
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 454,
+              "unit": "g"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.25,
+              "unit": ""
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 1,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 3,
+          "title": "Spicy Garlic Rosemary Shrimp & Pasta"
+        },
+        {
+          "id": 3,
+          "image_name": "butter-and-herb-poached-shrimp.jpg",
+          "ingredients": [
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 300,
+              "unit": "g"
+            },
+            {
+              "department": "Spices",
+              "name": "garlic Powder ",
+              "quantity": 2,
+              "unit": "ml"
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 0,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 2,
+          "title": "Butter and Herb Poached Shrimp"
+        }
+      ]);
+    })
+  });
+
+  describe('cleanIngredientUnits', () => {
+    test('should unify ingredient units and quantities', ()=> {
+      // Given
+      const ingredients = [
+        ...recipes[1].ingredients,
+        ...recipes[2].ingredients
+      ]
+      // When
+      const result = ingredientService.cleanIngredientsUnits(ingredients);
+  
+      // Then
+      expect(result).toEqual([
+        {
+          "department": "Produce",
+          "name": "cherry tomatoes",
+          "quantity": 237,
+          "unit": "ml"
+        },
+        {
+          "department": "Produce",
+          "name": "cucumber",
+          "quantity": 237,
+          "unit": "ml"
+        },
+        {
+          "department": "Produce",
+          "name": "garlic",
+          "quantity": 0.25,
+          "unit": ""
+        },
+        {
+          "department": "Produce",
+          "name": "parsley",
+          "quantity": 15,
+          "unit": "ml"
+        },
+        {
+          "department": "Condiments",
+          "name": "olive oil",
+          "quantity": 15,
+          "unit": "ml"
+        },
+        {
+          "department": "Pasta",
+          "name": "pasta",
+          "quantity": 227,
+          "unit": "g"
+        },
+        {
+          "department": "Seafood",
+          "name": "shrimp",
+          "quantity": 454,
+          "unit": "g"
+        },
+        {
+          "department": "Produce",
+          "name": "garlic",
+          "quantity": 0.25,
+          "unit": ""
+        },
+        {
+          "department": "Spices",
+          "name": "salt and pepper",
+          "quantity": 1,
+          "unit": ""
+        }
+      ]);
+    })
+  });
+
+  describe('computeRecipesIngredientsForOnePerson', () => {
+    test('should compute recipe and ingredients for one person', () => {
+      // Given
+      const recipesCleanedArray = [
+        {
+          "id": 1,
+          "image_name": "tomato-cucumber-avocado-salad.jpg",
+          "ingredients": [
+            {
+              "department": "Produce",
+              "name": "cherry tomatoes",
+              "quantity": 237,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "cucumber",
+              "quantity": 237,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.25,
+              "unit": ""
+            },
+            {
+              "department": "Produce",
+              "name": "parsley",
+              "quantity": 15,
+              "unit": "ml"
+            },
+            {
+              "department": "Condiments",
+              "name": "olive oil",
+              "quantity": 15,
+              "unit": "ml"
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 4,
+          "title": "Tomato Cucumber Avocado Salad"
+        },
+        {
+          "id": 2,
+          "image_name": "spicy-garlic-rosemary-shrimp-pasta.jpg",
+          "ingredients": [
+            {
+              "department": "Pasta",
+              "name": "pasta",
+              "quantity": 227,
+              "unit": "g"
+            },
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 454,
+              "unit": "g"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.25,
+              "unit": ""
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 1,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 3,
+          "title": "Spicy Garlic Rosemary Shrimp & Pasta"
+        },
+        {
+          "id": 3,
+          "image_name": "butter-and-herb-poached-shrimp.jpg",
+          "ingredients": [
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 300,
+              "unit": "g"
+            },
+            {
+              "department": "Spices",
+              "name": "garlic Powder ",
+              "quantity": 2,
+              "unit": "ml"
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 0,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 2,
+          "title": "Butter and Herb Poached Shrimp"
+        }
+      ];
+
+      // When
+      const result = ingredientService.computeRecipesIngredientsForOnePerson(recipesCleanedArray)
+
+      // Then
+      expect(result).toEqual([
+        {
+          "id": 1,
+          "image_name": "tomato-cucumber-avocado-salad.jpg",
+          "ingredients": [
+            {
+              "department": "Produce",
+              "name": "cherry tomatoes",
+              "quantity": 59.25,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "cucumber",
+              "quantity": 59.25,
+              "unit": "ml"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.0625,
+              "unit": ""
+            },
+            {
+              "department": "Produce",
+              "name": "parsley",
+              "quantity": 3.75,
+              "unit": "ml"
+            },
+            {
+              "department": "Condiments",
+              "name": "olive oil",
+              "quantity": 3.75,
+              "unit": "ml"
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 4,
+          "title": "Tomato Cucumber Avocado Salad"
+        },
+        {
+          "id": 2,
+          "image_name": "spicy-garlic-rosemary-shrimp-pasta.jpg",
+          "ingredients": [
+            {
+              "department": "Pasta",
+              "name": "pasta",
+              "quantity": 75.66666666666667,
+              "unit": "g"
+            },
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 151.33333333333334,
+              "unit": "g"
+            },
+            {
+              "department": "Produce",
+              "name": "garlic",
+              "quantity": 0.08333333333333333,
+              "unit": ""
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 0.3333333333333333,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 3,
+          "title": "Spicy Garlic Rosemary Shrimp & Pasta"
+        },
+        {
+          "id": 3,
+          "image_name": "butter-and-herb-poached-shrimp.jpg",
+          "ingredients": [
+            {
+              "department": "Seafood",
+              "name": "shrimp",
+              "quantity": 150,
+              "unit": "g"
+            },
+            {
+              "department": "Spices",
+              "name": "garlic Powder ",
+              "quantity": 1,
+              "unit": "ml"
+            },
+            {
+              "department": "Spices",
+              "name": "salt and pepper",
+              "quantity": 0,
+              "unit": ""
+            }
+          ],
+          "instructions": "instructions.",
+          "servings": 2,
+          "title": "Butter and Herb Poached Shrimp"
+        }
+      ]);
+    })
+  })
+
+  describe('quantitiesForOnePerson', () => {
+    test('should divide quantities for 1 person', ()=> {
+      // Given
+      const servings = recipes[1].servings;
+      const ingredients = recipes[1].ingredients;
+
+      // When
+      const result = ingredientService.quantitiesForOnePerson(servings, ingredients);
+
+      // Then
+      expect(result).toEqual([
+        {
+          "department": "Produce",
+          "display_index": 0,
+          "name": "cherry tomatoes",
+          "quantity": 59.25,
+          "unit": "ml"
+        },
+        {
+          "department": "Produce",
+          "display_index": 1,
+          "name": "cucumber",
+          "quantity": 59.25,
+          "unit": "ml"
+        },
+        {
+          "department": "Produce",
+          "display_index": 4,
+          "name": "garlic",
+          "quantity": 0.5,
+          "unit": "cloves"
+        },
+        {
+          "department": "Produce",
+          "display_index": 5,
+          "name": "parsley",
+          "quantity": 3.75,
+          "unit": "ml"
+        },
+        {
+          "department": "Condiments",
+          "display_index": 6,
+          "name": "olive oil",
+          "quantity": 3.75,
+          "unit": "ml"
+        }
+      ]);
+    })
   });
 
   describe('getSelectedRecipeIds', () => {

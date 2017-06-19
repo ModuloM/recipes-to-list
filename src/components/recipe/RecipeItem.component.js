@@ -41,6 +41,8 @@ const RecipeImage = styled.img`
 const RecipeInstructions = styled.div`
   font-size: 1rem;
   text-align: left;
+  max-height: 250px;
+  overflow: auto;
 `;
 
 const RecipeItem = ({

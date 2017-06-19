@@ -7,7 +7,7 @@
 ## Prerequisites
 
 - NodeJS (see [package.json](./package.json) file for version)
-- Yarn ~ 0.23.4
+- Yarn (idem)
 
 ## Install
 
@@ -27,16 +27,18 @@ Run `yarn test`.
 - Redux
 - React Router
 - Styled-Components
+- Ramda
 - Webpack
 - Babel
 - Flow
-- Create-React-App
+- Create-React-App (Ejected)
 ...
 
-### TODO
+### Evolutions & improvments
 
-- fix navigation ...
-- add data cleaning on load (ingredients for one person)
-- add input number to increase / decrease servings
-- unify units kg -> g
-- fix test connected components and add tests
+- add tests for reducers and more
+- finish to implement ability to increase or decrease servings
+- improve Flow configuration (Redux mostly)
+- save list and checked state
+- improve PWA features (caches, etc.)
+- ...

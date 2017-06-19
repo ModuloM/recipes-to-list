@@ -1,6 +1,7 @@
 // @flow
 import type { Recipe } from '../../types/Recipe.type';
 import data from '../../assets/data/recipes.json';
+import { cleanRecipesIngredientsUnits } from '../../services/ingredient.service';
 
 export type RECIPE_LIST_SUCCESS_ACTION = {
   type: "[RECIPE LIST] SUCCESS",
@@ -10,7 +11,7 @@ export type RECIPE_LIST_SUCCESS_ACTION = {
 export function requestRecipeList(): RECIPE_LIST_SUCCESS_ACTION {
   return {
     type: "[RECIPE LIST] SUCCESS",
-    recipes: data
+    recipes: cleanRecipesIngredientsUnits(data)
   }  
 }
 

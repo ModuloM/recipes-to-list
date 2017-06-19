@@ -55,15 +55,15 @@ class IngredientElement extends React.Component {
         />
         { !this.state.checked &&
           <IngredientUnchecked>
-            { name } - { quantity > 0 &&
-              <span>{ quantity } { unit }</span>
+            { name }{ quantity >= 0 &&
+              <span> - { quantity > 0 ? quantity : 1 } { unit }</span>
             } 
           </IngredientUnchecked>
         }
         { this.state.checked &&
           <IngredientChecked>
-            { name } - { quantity > 0 &&
-              <span>{ quantity } { unit }</span>
+            { name }{ quantity >= 0 &&
+              <span> - { quantity > 0 ? quantity : 1 } { unit }</span>
             }
           </IngredientChecked>
         }

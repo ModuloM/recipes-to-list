@@ -40,7 +40,7 @@ export const getSelectedRecipes = (state: State): SelectedRecipes => {
   return state.recipe.selectedRecipes;
 };
 
-export const getRecipes = (state: State): Array<mixed> => {
+export const getRecipes = (state: State): Array<Recipe> => {
   return state.recipe.entities;
 };
 

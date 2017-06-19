@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import type { Store } from 'types/Store.type';
 import App from './components/app/App.component';
@@ -29,9 +30,11 @@ const configureStore = (): Store => createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const history = createBrowserHistory()
+
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <Router>
+    <Router history={history}>
       <App>
         <Route exact path="/"
           component={RecipeList}
