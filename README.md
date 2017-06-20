@@ -2,16 +2,19 @@
 
 **An awesome recipes :fork_and_knife: shopping app!**  
 :sushi: = :rice: +  :fish: => :page_with_curl: :purse:
-> A PWA that provide delicious recipes that you can shop ingredients as a tap away!
+> A PWA that provide delicious recipes that you can shop ingredients from with a simple tap!
 
 ## Prerequisites
 
-- NodeJS (see [package.json](./package.json) file for version)
-- Yarn (idem)
+- NodeJS, Npm, Yarn (see [package.json](./package.json) file for versions)
 
 ## Install
 
 Run `yarn`.
+
+## Start
+
+Run `yarn start`.
 
 ## Build
 
